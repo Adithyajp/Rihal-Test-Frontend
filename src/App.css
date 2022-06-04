@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar-colour {
+  background: linear-gradient(180deg, #8C4AF2 0%, #7253F6 56.77%, #6756F6 100%);
+}
+
+button.button-color {
+  background-color: #977FFF;
+ }
