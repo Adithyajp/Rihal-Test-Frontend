@@ -7,8 +7,9 @@ import Select from "react-select";
 
 const Students = () => {
   // Getting students from Appcontext
-  const { classes, countries, students, getStudentList } =
+  const { classes, countries, students, getStudentList, setNav } =
     useContext(AppContext);
+    setNav("Students")
 
   const [enteredStudent, setEnteredStudent] = useState("");
   const [enteredClass, setEnteredClass] = useState("");
@@ -72,7 +73,7 @@ const Students = () => {
     <>
       <div className="h-screen pl-80 pt-[40px]">
         <div className="flex items-center">
-          <h1 className="poppins text-3xl font-bold flex">Students</h1>
+        <h1 className="text-[30px] text-[#101828] font-medium flex">Students</h1>
           <button
             type="button"
             onClick={openModal}

@@ -4,6 +4,7 @@ import { getClasses, getCountries, getStudents } from "../Api";
 export const AppContext = createContext({});
 
 export const AppContextProvider = ({ children }) => {
+  const [nav, setNav] = useState("Home");
   const [countries, setCountries] = useState([]);
   const [classes, setClasses] = useState([]);
   const [students, setStudents] = useState([]);
@@ -49,6 +50,8 @@ export const AppContextProvider = ({ children }) => {
     getClassList,
     students,
     getStudentList,
+    nav,
+    setNav,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

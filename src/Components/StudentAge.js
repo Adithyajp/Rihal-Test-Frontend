@@ -32,20 +32,36 @@ const StudentAge = () => {
   useEffect(() => {
     ageCounter();
     ageAverage();
-  }, [students,age]);
+  }, [students, age]);
 
-
-
-//   useEffect(() => {
-//     console.log(values);
-//   }, [values]);
+  //   useEffect(() => {
+  //     console.log(values);
+  //   }, [values]);
 
   return (
     <div>
-      <h1>Average Age of Students</h1>
-      <div className="flex items-center justify-center my-5">
-        <h1 className="font-semibold">{age}</h1>
+      <div className="flex items-center rounded-[16px] bg-[#ECFDF3] px-3 py-1">
+        <i class="bx bxs-circle text-[#027A48] text-[6px] mr-[5px]"></i>
+        <h1 className="text-[#027A48] text-[17px] font-semibold">
+          {" "}
+          Average age of students{" "}
+        </h1>
       </div>
+      {isNaN(age) && (
+        <h1 className="ml-10 mt-5 text-[#9ea5b5] text-[14px] font-medium text-left">
+          No students have been added
+        </h1>
+      )}
+      {isNaN(age) === false && (
+        <div className="grid grid-cols-2 my-5 ml-5">
+          <h1 className="text-[#101828] text-[14px] text-left font-medium">
+            Average age
+          </h1>
+          <h1 className="ml-20 text-[#667085] text-[14px] font-medium text-left">
+            {age}
+          </h1>
+        </div>
+      )}
     </div>
   );
 };

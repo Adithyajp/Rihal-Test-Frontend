@@ -6,7 +6,8 @@ import { AppContext } from "../Contexts/AppContext";
 
 const Classes = () => {
   // Getting classes from Appcontext
-  const { classes, getClassList } = useContext(AppContext);
+  const { classes, getClassList, setNav } = useContext(AppContext);
+  setNav("Classes")
 
   const [enteredClass, setEnteredClass] = useState("");
   let [isOpen, setIsOpen] = useState(false);
@@ -42,7 +43,7 @@ const Classes = () => {
     <>
       <div className="h-screen pl-80 pt-[40px]">
         <div className="flex items-center">
-          <h1 className="poppins text-3xl font-bold flex">Classes</h1>
+        <h1 className="text-[30px] text-[#101828] font-medium flex">Classes</h1>
           <button
             type="button"
             onClick={openModal}

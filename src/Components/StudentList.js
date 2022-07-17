@@ -94,7 +94,7 @@ const StudentList = (props) => {
               Date of Birth
             </h1>
             <div className="flex items-center justify-center w-[164px] ml-7 px-5 h-[40px] rounded-[4px]  border border-[#CBB7F1]">
-              <i class="bx bx-calendar-alt mr-3 text-xl"></i>
+              <i className="bx bx-calendar-alt mr-3 text-xl"></i>
               {moment(data.date_of_birth).format("l")}
             </div>
           </div>
@@ -106,7 +106,7 @@ const StudentList = (props) => {
             onClick={openModal}
             className="button-color text-white text-lg px-6 py-1 rounded-xl font-black nunito border-2 border-[#B5A4FF] hover:bg-[#8959EA] transition"
           >
-            <i class="bx bx-trash text-xl"></i>
+            <i className="bx bx-trash text-xl"></i>
           </button>
         </div>
       </div>

@@ -7,7 +7,8 @@ import { createCountries } from "../Api";
 
 const Countries = () => {
   // Getting countries from Appcontext
-  const { countries, getCountryList } = useContext(AppContext);
+  const { countries, getCountryList, setNav } = useContext(AppContext);
+  setNav("Countries")
 
   const [enteredCountry, setEnteredCountry] = useState("");
   let [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,7 @@ const Countries = () => {
     <>
     <div className="h-screen pl-80 pt-[40px]">
       <div className="flex items-center">
-        <h1 className="poppins text-3xl font-bold flex">Countries</h1>
+      <h1 className="text-[30px] text-[#101828] font-medium flex">Countries</h1>
         <button
           type="button"
           onClick={openModal}
