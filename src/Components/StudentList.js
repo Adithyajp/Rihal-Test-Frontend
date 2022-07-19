@@ -7,13 +7,20 @@ import { deleteStudents } from "../Api";
 const StudentList = (props) => {
   let { data } = props;
   const { classes, countries, getStudentList } = useContext(AppContext);
+  console.log(data)
+  console.log(countries)
 
-  // const idReplace = () => {
-  //   //   console.log(classes)
-  //   let class_name = classes.find((item) => item._id === data.class_id);
-  //   console.log(class_name?.class_name)
-  //   data.class_id = class_name?.class_name;
-  // };
+  classes.map((item) =>{
+    if(item._id === data.class_id) {
+      data.class_id = item.class_name
+    }
+  })
+
+  countries.map((item) =>{
+    if(item._id === data.country_id) {
+      data.country_id = item.name
+    }
+  })
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -33,7 +40,7 @@ const StudentList = (props) => {
 
   const studentDeleteHandler = async () => {
     try {
-      await deleteStudents(data.id);
+      await deleteStudents(data._id);
     } catch (e) {
       console.log(e?.response ?? e);
     } finally {

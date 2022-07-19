@@ -1,22 +1,40 @@
 import { useContext } from "react";
 import { AppContext } from "../Contexts/AppContext";
-import { ToastContainer, toast } from "react-toast";
 import { deleteClasses } from "../Api";
 
 const ClassList = (props) => {
-  const { getClassList } = useContext(AppContext);
+  const { getClassList} = useContext(AppContext);
   const { data } = props;
 
-  const notify = () => toast.success("Class deleted 🗑️");
+  const showNoty = (value, type) => {
+    var x = document.getElementById("snackbar");
+    x.innerHTML = value;
+    x.className = "show";
+    if (type == "green") {
+      x.style.backgroundColor = "green";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+        x.style.backgroundColor = x.style.backgroundColor.replace(
+          "green",
+          "rgba(232, 42, 42, 0.86)"
+        );
+      }, 3000);
+    } else {
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 3000);
+    }
+  };
 
   const classDeleteHandler = async () => {
     try {
-      await deleteClasses(data.id);
+      console.log(data._id)
+      await deleteClasses(data._id);
+      showNoty("Deleted class successfully", "green");
     } catch (e) {
-      console.log(e?.response ?? e);
+      showNoty(e?.response.data.error ?? e);
     } finally {
       getClassList();
-      notify();
     }
   };
 
@@ -31,7 +49,7 @@ const ClassList = (props) => {
           Delete
         </button>
       </div>
-      <ToastContainer />
+      <div id="snackbar"></div>
     </>
   );
 };

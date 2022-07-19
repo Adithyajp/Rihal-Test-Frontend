@@ -13,7 +13,7 @@ const CountClass = () => {
       return {
         name: itemm.class_name,
         count: students?.map((item) => {
-          var count = 0;
+          let count = 0;
           if (itemm._id == item.class_id) {
             count++;
           }
@@ -27,7 +27,7 @@ const CountClass = () => {
     data.forEach((data) => {
       let sum = 0;
       for (let i = 0; i < data?.count?.length; i++) {
-        sum += data?.count[i];
+        sum = sum + data?.count[i];
       }
       data.count = sum;
     });

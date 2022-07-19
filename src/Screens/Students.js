@@ -10,6 +10,27 @@ const Students = () => {
   const { classes, countries, students, getStudentList, setNav } =
     useContext(AppContext);
     setNav("Students")
+    const [maxDate, setMaxDate] = useState(new Date());
+    
+  const showNoty = (value, type) => {
+    var x = document.getElementById("snackbar");
+    x.innerHTML = value;
+    x.className = "show";
+    if (type == "green") {
+      x.style.backgroundColor = "green";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+        x.style.backgroundColor = x.style.backgroundColor.replace(
+          "green",
+          "rgba(232, 42, 42, 0.86)"
+        );
+      }, 3000);
+    } else {
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 3000);
+    }
+  };
 
   const [enteredStudent, setEnteredStudent] = useState("");
   const [enteredClass, setEnteredClass] = useState("");
@@ -51,6 +72,8 @@ const Students = () => {
   //   console.log(enteredCountry);
   // }, [enteredCountrys]);
 
+  const max_date = new Date()
+
   const createStudentHandler = async (e) => {
     e.preventDefault();
     const studentdata = {
@@ -59,6 +82,18 @@ const Students = () => {
       name: enteredStudent,
       date_of_birth: dob
     };
+    if(studentdata.class_id === "" || studentdata.class_id === null || studentdata.class_id === " " || studentdata.class_id === undefined) {
+      return showNoty("Please select a class")
+    }
+    if(studentdata.country_id === "" || studentdata.country_id === null || studentdata.country_id === " " || studentdata.country_id === undefined) {
+      return showNoty("Please select a country")
+    }
+    if(studentdata.name === "" || studentdata.name === null || studentdata.name === " ") {
+      return showNoty("Student name cannot be empty")
+    }
+    if(studentdata.date_of_birth === "" || studentdata.date_of_birth === null || studentdata.date_of_birth === " ") {
+      return showNoty("Please select a date")
+    }
     setEnteredStudent("");
     console.log(studentdata);
     try {
@@ -84,7 +119,7 @@ const Students = () => {
         </div>
         <div className="grid grid-cols-1 divide-y-2 pt-10">
           {students?.map((data) => (
-            <StudentList key={data.id} data={data} />
+            <StudentList key={data._id} data={data} />
           ))}
         </div>
       </div>
@@ -170,6 +205,7 @@ const Students = () => {
                           value={dob}
                           onChange={dobHandler}
                           type="date"
+                          max={new Date().toISOString().split("T")[0]}
                           className="w-[164px] ml-7 px-5 h-[40px] rounded-[4px] border border-[#CBB7F1]"
                         ></input>
                       </div>
@@ -196,6 +232,7 @@ const Students = () => {
           </div>
         </Dialog>
       </Transition>
+      <div id="snackbar"></div>
     </>
   );
 };

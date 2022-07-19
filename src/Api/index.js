@@ -49,9 +49,9 @@ const _delete = async (URL) => {
 };
 
 ///Country APIs
-export const getCountries = () => {
+export const getCountries = async () => {
   const URL = API_BASE_URL + `/countries`;
-  return get(URL);
+  return await get(URL);
 };
 
 export const createCountries = async (data) => {
@@ -77,9 +77,9 @@ export const deleteCountries = (countryId) => {
 };
 
 ///Classes APIs
-export const getClasses = () => {
+export const getClasses = async () => {
   const URL = API_BASE_URL + `/classes`;
-  return get(URL);
+  return await get(URL);
 };
 
 export const createClasses = async (data) => {
@@ -105,9 +105,9 @@ export const deleteClasses = (classId) => {
 };
 
 ///Studenst APIs
-export const getStudents = () => {
+export const getStudents = async () => {
   const URL = API_BASE_URL + `/students`;
-  return get(URL);
+  return await get(URL);
 };
 
 export const createStudents = async (data) => {

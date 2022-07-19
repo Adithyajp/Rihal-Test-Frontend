@@ -1,23 +1,40 @@
 import { useContext } from "react";
 import { AppContext } from "../Contexts/AppContext";
-import { ToastContainer, toast } from 'react-toast'
+import { ToastContainer, toast } from "react-toast";
 import { deleteCountries } from "../Api";
 
 const CountryList = (props) => {
   const { getCountryList } = useContext(AppContext);
   const { data } = props;
 
-  const notify = () => toast.success('Country deleted 🗑️')
-
+  const showNoty = (value, type) => {
+    var x = document.getElementById("snackbar");
+    x.innerHTML = value;
+    x.className = "show";
+    if (type == "green") {
+      x.style.backgroundColor = "green";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+        x.style.backgroundColor = x.style.backgroundColor.replace(
+          "green",
+          "rgba(232, 42, 42, 0.86)"
+        );
+      }, 3000);
+    } else {
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 3000);
+    }
+  };
 
   const countryDeleteHandler = async () => {
     try {
-      await deleteCountries(data.id);
+      await deleteCountries(data._id);
+      showNoty("Deleted country successfully", "green");
     } catch (e) {
-      console.log(e?.response ?? e);
+      showNoty(e?.response.data.error ?? e);
     } finally {
       getCountryList();
-      notify();
     }
   };
 
@@ -32,7 +49,7 @@ const CountryList = (props) => {
           Delete
         </button>
       </div>
-      <ToastContainer />
+      <div id="snackbar"></div>
     </>
   );
 };

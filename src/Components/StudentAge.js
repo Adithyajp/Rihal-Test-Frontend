@@ -47,21 +47,22 @@ const StudentAge = () => {
           Average age of students{" "}
         </h1>
       </div>
-      {isNaN(age) && (
+      {isNaN(age)  && (
         <h1 className="ml-10 mt-5 text-[#9ea5b5] text-[14px] font-medium text-left">
           No students have been added
         </h1>
       )}
-      {isNaN(age) === false && (
-        <div className="grid grid-cols-2 my-5 ml-5">
-          <h1 className="text-[#101828] text-[14px] text-left font-medium">
-            Average age
-          </h1>
-          <h1 className="ml-20 text-[#667085] text-[14px] font-medium text-left">
-            {age}
-          </h1>
-        </div>
+       {isNaN(age) === false  && (
+      <div className="grid grid-cols-2 my-5 ml-5">
+      <h1 className="text-[#101828] text-[14px] text-left font-medium">
+        Average age
+      </h1>
+      <h1 className="ml-20 text-[#667085] text-[14px] font-medium text-left">
+        {age}
+      </h1>
+    </div>
       )}
+
     </div>
   );
 };

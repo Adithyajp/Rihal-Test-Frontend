@@ -8,6 +8,26 @@ const Classes = () => {
   // Getting classes from Appcontext
   const { classes, getClassList, setNav } = useContext(AppContext);
   setNav("Classes")
+  
+  const showNoty = (value, type) => {
+    var x = document.getElementById("snackbar");
+    x.innerHTML = value;
+    x.className = "show";
+    if (type == "green") {
+      x.style.backgroundColor = "green";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+        x.style.backgroundColor = x.style.backgroundColor.replace(
+          "green",
+          "rgba(232, 42, 42, 0.86)"
+        );
+      }, 3000);
+    } else {
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 3000);
+    }
+  };
 
   const [enteredClass, setEnteredClass] = useState("");
   let [isOpen, setIsOpen] = useState(false);
@@ -29,6 +49,9 @@ const Classes = () => {
     const classdata = {
       class_name: enteredClass,
     };
+    if(classdata.class_name === "" || classdata.class_name === null || classdata.class_name === " ") {
+      return showNoty("Class name cannot be empty")
+    }
     setEnteredClass("");
     console.log(classdata);
     try {
@@ -54,7 +77,7 @@ const Classes = () => {
         </div>
         <div className="grid grid-cols-1 divide-y-2 pt-10">
           {classes?.map((data) => (
-            <ClassList key={data.id} data={data} />
+            <ClassList key={data._id} data={data} />
           ))}
         </div>
       </div>
@@ -129,6 +152,7 @@ const Classes = () => {
           </div>
         </Dialog>
       </Transition>
+      <div id="snackbar"></div>
     </>
   );
 };

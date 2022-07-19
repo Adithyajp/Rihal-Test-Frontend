@@ -10,6 +10,26 @@ const Countries = () => {
   const { countries, getCountryList, setNav } = useContext(AppContext);
   setNav("Countries")
 
+  const showNoty = (value, type) => {
+    var x = document.getElementById("snackbar");
+    x.innerHTML = value;
+    x.className = "show";
+    if (type == "green") {
+      x.style.backgroundColor = "green";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+        x.style.backgroundColor = x.style.backgroundColor.replace(
+          "green",
+          "rgba(232, 42, 42, 0.86)"
+        );
+      }, 3000);
+    } else {
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 3000);
+    }
+  };
+
   const [enteredCountry, setEnteredCountry] = useState("");
   let [isOpen, setIsOpen] = useState(false);
 
@@ -30,6 +50,9 @@ const Countries = () => {
     const countrydata = {
       name: enteredCountry,
     };
+    if(countrydata.name === "" || countrydata.name === null || countrydata.name === " ") {
+      return showNoty("Country name cannot be empty")
+    }
     setEnteredCountry("");
     console.log(countrydata);
     try {
@@ -55,7 +78,7 @@ const Countries = () => {
       </div>
       <div className="grid grid-cols-1 divide-y-2 pt-10">
         {countries?.map((data) => (
-          <CountryList key={data.id} data={data} />
+          <CountryList key={data._id} data={data} />
         ))}
       </div>
     </div>
@@ -131,6 +154,7 @@ const Countries = () => {
           </div>
         </Dialog>
       </Transition>
+      <div id="snackbar"></div>
     </>
   )
 }
